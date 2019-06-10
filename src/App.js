@@ -1,40 +1,48 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+const Context = React.createContext();
+// Context has two properties. Provide and Consumer
 
-function Parent({name}){
-  return (
-      <div>
-        <h1>Parent</h1>
-        <Child name={name}/>
-      </div>
-  )
+function Parent(){
+    return (
+        <div>
+            <h1>Parent</h1>
+            <Child/>
+        </div>
+    )
 }
 
-function Child({name}) {
-  return (
-      <div>
-        <h1>Child</h1>
-        <GrandChild name={name}/>
-      </div>
-  )
+function Child() {
+    return (
+        <div>
+            <h1>Child</h1>
+            <GrandChild />
+        </div>
+    )
 }
 
-function GrandChild({name}) {
-  return (
-      <div>
-        <h1>Grand Child</h1>
-        <h3>Name: {name}</h3>
-      </div>
-  )
+function GrandChild() {
+    return (
+        <Context.Consumer>
+            {(name) => (
+                <div>
+                    <h1>Grand Child</h1>
+                    <h3>Name: {name}</h3>
+                </div>
+            )}
+        </Context.Consumer>
+
+    )
 }
 function App() {
-  const name = "Bernard";
-  return (
-    <div className="App">
-      <Parent name={name}/>
-    </div>
-  );
+    const name = "Bernard";
+    return (
+        <div className="App">
+            <Context.Provider value={name}>
+                <Parent name={name}/>
+            </Context.Provider>
+        </div>
+    );
 }
 
 export default App;

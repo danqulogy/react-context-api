@@ -1,0 +1,39 @@
+import React from 'react';
+import './App.css';
+
+function XParent({name}){
+  return (
+      <div>
+        <h1>Parent</h1>
+        <XChild name={name}/>
+      </div>
+  )
+}
+
+function XChild({name}) {
+  return (
+      <div>
+        <h1>Child</h1>
+        <XGrandChild name={name}/>
+      </div>
+  )
+}
+
+function XGrandChild({name}) {
+  return (
+      <div>
+        <h1>Grand Child</h1>
+        <h3>Name: {name}</h3>
+      </div>
+  )
+}
+function XApp() {
+  const name = "Bernard";
+  return (
+    <div className="App">
+      <XParent name={name}/>
+    </div>
+  );
+}
+
+export default App;
